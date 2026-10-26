@@ -1,0 +1,15 @@
+Run ID,Model,Training Dataset,Training Dataset Size,Testing Dataset,Testing Dataset Size,Aggregation Method,Prediction Target,Model Parameters,Evaluation Method,RMSE,R2
+Linear_600_Mean,Linear Regression,600 aggregated,537,600 holdout 20%,135,,Band gap (mean),,,0.0796712826953187,0.8718001362349111
+Linear_600_Median,Linear Regression,600 aggregated,537,600 holdout 20%,135,,Band gap (median),,,0.0803717170410304,0.8711479966221783
+Linear_600_to_12000_Mean,Linear Regression,600 aggregated (mean),537,12000 experimental,12672,,Band gap,,,0.0596587453366474,0.6945422758128892
+Linear_600_to_12000_Median,Linear Regression,600 aggregated (median),537,12000 experimental,12672,,Band gap,,,0.0590215336684469,0.7010325816000923
+Linear_12000_Bandgap,Linear Regression,12000 experimental,10137,12000 holdout 20%,2535,,Band gap,,,0.0444122373528434,0.8255365284933471
+KNN_600_Mean,K Nearest Neighbours,Aggregated,537,Aggregated,135,Mean,Band Gap,k=3,80/20 Holdout,0.0527856830079114,0.9437249051279312
+KNN_600_Median,K Nearest Neighbours,Aggregated,537,Aggregated,135,Median,Band Gap,k=3,80/20 Holdout,0.0527093006059686,0.9445809356253184
+KNN_600_to_12000_Mean,K Nearest Neighbours,Aggregated,537,Non-Aggregated,12672,Mean,Band Gap,k=3,Cross-Dataset,0.034431973318474,0.8982518066225101
+KNN_600_to_12000_Median,K Nearest Neighbours,Aggregated,537,Non-Aggregated,12672,Median,Band Gap,k=3,Cross-Dataset,0.0347675318640912,0.8962589586327679
+KNN_12000_Bandgap,K Nearest Neighbours,Non-Aggregated,10137,Non-Aggregated,2535,,Band Gap,k=3,80/20 Holdout,0.037369699109992,0.8764796801180142
+Ridge_600_Bandgap,Ridge Regression,Aggregated,534,Aggregated,134,Mean,Band Gap,alpha=21.5443,80/20 Holdout,0.10217721377399172,0.830912308790529
+Ridge_600_to_12000,Ridge Regression,Aggregated,668,Non-Aggregated,12672,Mean,Band Gap,alpha=21.5443,Cross-Dataset,0.05720413578944882,0.7191607928633921
+Ridge_12000_Bandgap,Ridge Regression,Non-Aggregated,10137,Non-Aggregated,2535,N/A,Band Gap,alpha=93.2603,80/20 Holdout,0.0461650174413738,0.8457434280431533
+Ridge_600_PCE,Ridge Regression,Aggregated,534,Aggregated,134,Mean,PCE,alpha=31.6228,80/20 Holdout,3.858840385623422,0.45345975538405325
