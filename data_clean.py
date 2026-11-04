@@ -69,4 +69,49 @@ df.duplicated(subset=columns).sum()
 df = df.drop_duplicates(subset = columns)
 ###
 
-print(len(df))
+
+#adding in a loop that sorts out the issue with
+# Cl;Br = 0.25;0.75 and Br;CL = 0.75,0.25 not being the same
+
+ions = ['Cs','FA','MA','Pb','Sn','I','Br','Cl']
+clean_df = pd.DataFrame(columns = ions + ['band_gap'])
+skipped_val = 0
+
+for i in range(len(df)):
+    #making lots of rows of zeros
+    row = df.iloc[i]
+    new_row  = pd.Series(0.0, index = ions + ['band_gap'])
+    good = True
+
+
+
+
+    #scrapping where the lengths are different
+    for names, coeffs in [(row['Perovskite_composition_a_ions'],row['Perovskite_composition_a_ions_coefficients']),
+                          (row['Perovskite_composition_b_ions'], row['Perovskite_composition_b_ions_coefficients']),
+                          (row['Perovskite_composition_c_ions'], row['Perovskite_composition_c_ions_coefficients'])]:
+        names =   names.split('; ')
+        coeffs = coeffs.split('; ')
+        if len(names)!= len(coeffs):
+            good =  False
+            break
+        for j in range(len(names)):
+            try:
+                new_row[names[j]] = round(float(coeffs[j]),2)
+            except ValueError:
+                good = False
+    if not good:
+        skipped_val +=1 
+        continue
+
+    new_row['band_gap'] = row['Perovskite_band_gap']
+
+
+    #we'll append only if an identicla row isn't already in the clean df
+    if not (clean_df == new_row).all(axis =1).any():
+            clean_df.loc[len(clean_df)] = new_row
+
+
+print(len(clean_df),skipped_val)
+
+clean_df.to_csv('data/clean_data.csv', index = False)
